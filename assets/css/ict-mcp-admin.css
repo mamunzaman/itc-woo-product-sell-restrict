@@ -1,0 +1,171 @@
+/**
+ * ITC MCP Admin Styles
+ */
+
+.ict-mcp-admin-section {
+    margin: 20px 0;
+}
+
+.ict-mcp-admin-section h3 {
+    margin-bottom: 10px;
+    color: #23282d;
+}
+
+.ict-mcp-restriction-notice {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 15px 0;
+    color: #856404;
+}
+
+.ict-mcp-restriction-notice strong {
+    color: #d63031;
+}
+
+.ict-mcp-restriction-notice ul {
+    margin: 10px 0 0 20px;
+}
+
+.ict-mcp-restriction-notice li {
+    margin-bottom: 5px;
+}
+
+.ict-mcp-remove-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.ict-mcp-remove-btn:hover {
+    background: #c82333;
+}
+
+.ict-mcp-remove-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.ict-mcp-modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ict-mcp-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.ict-mcp-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.ict-mcp-modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #23282d;
+}
+
+.ict-mcp-modal-close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.ict-mcp-modal-close:hover,
+.ict-mcp-modal-close:focus {
+    color: #000;
+}
+
+.ict-mcp-modal-body {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.ict-mcp-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.ict-mcp-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.ict-mcp-btn-primary {
+    background: #0073aa;
+    color: white;
+}
+
+.ict-mcp-btn-primary:hover {
+    background: #005a87;
+}
+
+.ict-mcp-btn-secondary {
+    background: #f1f1f1;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.ict-mcp-btn-secondary:hover {
+    background: #e1e1e1;
+}
+
+.ict-mcp-btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.ict-mcp-btn-danger:hover {
+    background: #c82333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .ict-mcp-modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+    }
+    
+    .ict-mcp-modal-footer {
+        flex-direction: column;
+    }
+    
+    .ict-mcp-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

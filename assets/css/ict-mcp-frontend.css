@@ -1,0 +1,625 @@
+/**
+ * ITC MCP Frontend Styles
+ */
+
+.ict-mcp-restriction-notice {
+    background: linear-gradient(135deg, #fff3cd 0%, #fef7e0 100%);
+    border: 1px solid #ffeaa7;
+    border-left: 5px solid #ffc107;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+    color: #856404;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    animation: ict-mcp-slideInUp 0.5s ease-out;
+}
+
+.ict-mcp-restriction-notice::before {
+    content: "⚠️";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.ict-mcp-restriction-notice .ict-mcp-notice-content {
+    margin-left: 40px;
+}
+
+.ict-mcp-restriction-notice.woocommerce-notice {
+    margin: 0 0 20px 0;
+}
+
+.ict-mcp-restriction-notice strong {
+    color: #d63031;
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ict-mcp-restriction-notice ul {
+    margin: 15px 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ict-mcp-restriction-notice li {
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    border-left: 3px solid #ffc107;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.ict-mcp-restriction-notice li::before {
+    content: "🚫";
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.ict-mcp-restriction-notice li:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(5px);
+}
+
+.ict-mcp-restriction-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.ict-mcp-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    min-width: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ict-mcp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.ict-mcp-btn:hover::before {
+    left: 100%;
+}
+
+.ict-mcp-btn:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.ict-mcp-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ict-mcp-btn-primary {
+    background: linear-gradient(135deg, #0073aa 0%, #005a87 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 115, 170, 0.3);
+}
+
+.ict-mcp-btn-primary:hover {
+    background: linear-gradient(135deg, #005a87 0%, #004066 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 115, 170, 0.4);
+}
+
+.ict-mcp-btn-secondary {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.ict-mcp-btn-secondary:hover {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    color: #495057;
+    border-color: #adb5bd;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.ict-mcp-btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.ict-mcp-btn-danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+.ict-mcp-btn:disabled {
+    background: #6c757d;
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.ict-mcp-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.ict-mcp-btn-icon {
+    margin-right: 8px;
+    font-size: 16px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.ict-mcp-btn:hover .ict-mcp-btn-icon {
+    transform: scale(1.1);
+}
+
+.ict-mcp-modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: ict-mcp-fadeIn 0.3s ease;
+}
+
+.ict-mcp-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ict-mcp-modal-content {
+    background-color: #ffffff;
+    margin: 20px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: ict-mcp-slideIn 0.3s ease;
+}
+
+.ict-mcp-modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f3f4;
+    position: relative;
+}
+
+.ict-mcp-modal-icon {
+    font-size: 28px;
+    margin-right: 15px;
+    animation: ict-mcp-pulse 2s infinite;
+}
+
+.ict-mcp-modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: #23282d;
+    flex: 1;
+}
+
+.ict-mcp-modal-close {
+    color: #999;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.ict-mcp-modal-close:hover,
+.ict-mcp-modal-close:focus {
+    color: #333;
+}
+
+.ict-mcp-modal-body {
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.ict-mcp-modal-message {
+    margin-bottom: 20px;
+}
+
+.ict-mcp-modal-message p {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.ict-mcp-modal-products {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.ict-mcp-modal-products ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ict-mcp-modal-products li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.ict-mcp-modal-products li:last-child {
+    border-bottom: none;
+}
+
+.ict-mcp-product-icon {
+    font-size: 16px;
+    margin-right: 12px;
+    color: #dc3545;
+}
+
+.ict-mcp-product-name {
+    font-weight: 500;
+    color: #495057;
+}
+
+.ict-mcp-modal-question {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-radius: 8px;
+}
+
+.ict-mcp-modal-question p {
+    margin: 0;
+    font-size: 16px;
+    color: #1976d2;
+}
+
+.ict-mcp-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.ict-mcp-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #0073aa;
+    border-radius: 50%;
+    animation: ict-mcp-spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes ict-mcp-fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes ict-mcp-slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ict-mcp-slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ict-mcp-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes ict-mcp-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Cart page specific styles */
+.woocommerce-cart .ict-mcp-restriction-notice {
+    margin-bottom: 30px;
+}
+
+/* Checkout page specific styles */
+.woocommerce-checkout .ict-mcp-restriction-notice {
+    margin-bottom: 20px;
+}
+
+/* Product page restriction notice */
+.ict-mcp-product-restriction-notice {
+    background: linear-gradient(135deg, #fff3cd 0%, #fef7e0 100%);
+    border: 2px solid #ffc107;
+    border-left: 6px solid #ff9800;
+    border-radius: 12px;
+    padding: 0;
+    margin: 20px 0 25px 0;
+    color: #856404;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.2);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    animation: ict-mcp-slideInUp 0.4s ease-out;
+    overflow: hidden;
+    z-index: 10;
+    /***** added ***/
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Ensure notice appears prominently in product header */
+.woocommerce div.product .ict-mcp-product-restriction-notice {
+    margin: 0 0 25px 0;
+    width: 100%;
+    max-width: none;
+}
+
+/* Theme compatibility for header positioning */
+.single-product .ict-mcp-product-restriction-notice,
+.woocommerce div.product .ict-mcp-product-restriction-notice {
+    margin-bottom: 30px;
+}
+
+/* Specific positioning for common themes */
+.woocommerce div.product .woocommerce-product-gallery + .ict-mcp-product-restriction-notice,
+.woocommerce div.product .product_meta + .ict-mcp-product-restriction-notice,
+.woocommerce div.product .product_title + .ict-mcp-product-restriction-notice {
+    margin-top: 20px;
+}
+
+/* Ensure notice is visible and properly spaced */
+.woocommerce div.product {
+    position: relative;
+}
+
+.ict-mcp-product-restriction-notice {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Notice Header */
+.ict-mcp-product-restriction-notice .ict-mcp-notice-header {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ict-mcp-product-restriction-notice .ict-mcp-notice-icon {
+    font-size: 24px;
+    margin-right: 12px;
+    animation: ict-mcp-pulse 2s infinite;
+}
+
+.ict-mcp-product-restriction-notice .ict-mcp-notice-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Notice Content */
+.ict-mcp-product-restriction-notice .ict-mcp-notice-content {
+    padding: 20px;
+}
+
+.ict-mcp-product-restriction-notice .ict-mcp-notice-message {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #856404;
+    font-weight: 500;
+}
+
+/* Countries Section */
+.ict-mcp-product-restriction-notice .ict-mcp-notice-countries {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    padding: 12px 15px;
+    border-left: 3px solid #ffc107;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ict-mcp-product-restriction-notice .ict-mcp-countries-label {
+    font-weight: 600;
+    color: #d63031;
+    font-size: 13px;
+}
+
+.ict-mcp-product-restriction-notice .ict-mcp-countries-list {
+    color: #495057;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Success Message Styles */
+.ict-mcp-success-message {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 1px solid #c3e6cb;
+    border-left: 5px solid #28a745;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #155724;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15);
+    animation: ict-mcp-slideInUp 0.5s ease-out;
+}
+
+.ict-mcp-success-message::before {
+    content: "✅";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.ict-mcp-success-message .ict-mcp-success-content {
+    margin-left: 40px;
+}
+
+/* Error Message Styles */
+.ict-mcp-error-message {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border: 1px solid #f5c6cb;
+    border-left: 5px solid #dc3545;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #721c24;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.15);
+    animation: ict-mcp-slideInUp 0.5s ease-out;
+}
+
+.ict-mcp-error-message::before {
+    content: "❌";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.ict-mcp-error-message .ict-mcp-error-content {
+    margin-left: 40px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .ict-mcp-modal-content {
+        margin: 10px;
+        padding: 20px;
+        width: calc(100% - 20px);
+    }
+    
+    .ict-mcp-modal-footer {
+        flex-direction: column;
+    }
+    
+    .ict-mcp-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .ict-mcp-restriction-actions {
+        flex-direction: column;
+    }
+    
+    .ict-mcp-btn:last-child {
+        margin-bottom: 0;
+    }
+    
+    .ict-mcp-product-restriction-notice {
+        margin: 10px 0;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-notice-header {
+        padding: 12px 15px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-notice-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-notice-title {
+        font-size: 14px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-notice-content {
+        padding: 15px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-notice-message {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-notice-countries {
+        padding: 10px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-countries-label {
+        font-size: 12px;
+    }
+    
+    .ict-mcp-product-restriction-notice .ict-mcp-countries-list {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ict-mcp-modal-content {
+        margin: 5px;
+        padding: 15px;
+        width: calc(100% - 10px);
+    }
+    
+    .ict-mcp-modal-title {
+        font-size: 18px;
+    }
+    
+    .ict-mcp-restriction-notice {
+        padding: 12px;
+        margin: 15px 0;
+    }
+}

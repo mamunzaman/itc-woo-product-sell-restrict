@@ -1,0 +1,121 @@
+# Copyright (C) 2024 ITC Development
+# This file is distributed under the same license as the ITC WooCommerce Product Sell Restrict plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: ITC WooCommerce Product Sell Restrict 1.0.0\n"
+"Report-Msgid-Bugs-To: https://example.com\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: itc-woo-product-sell-restrict.php:25
+msgid "ITC WooCommerce Product Sell Restrict requires WooCommerce to be installed and active."
+msgstr ""
+
+#: includes/class-main.php:45
+msgid "Settings"
+msgstr ""
+
+#: includes/class-settings.php:77
+msgid "These products are not available for purchase in your country."
+msgstr ""
+
+#: includes/class-settings-page.php:15
+msgid "Restricted Purchase"
+msgstr ""
+
+#: includes/class-settings-page.php:22
+msgid "Restricted Purchase Settings"
+msgstr ""
+
+#: includes/class-settings-page.php:23
+msgid "Configure which products are restricted for purchase in specific countries."
+msgstr ""
+
+#: includes/class-settings-page.php:27
+msgid "Restricted Countries"
+msgstr ""
+
+#: includes/class-settings-page.php:28
+msgid "Select countries where restricted products cannot be purchased."
+msgstr ""
+
+#: includes/class-settings-page.php:36
+msgid "Select countries..."
+msgstr ""
+
+#: includes/class-settings-page.php:40
+msgid "Restricted Products"
+msgstr ""
+
+#: includes/class-settings-page.php:41
+msgid "Select products that are restricted for purchase in the specified countries."
+msgstr ""
+
+#: includes/class-settings-page.php:49
+msgid "Search for products..."
+msgstr ""
+
+#: includes/class-settings-page.php:53
+msgid "Restriction Message"
+msgstr ""
+
+#: includes/class-settings-page.php:54
+msgid "Customize the message shown to customers when restricted products are in their cart."
+msgstr ""
+
+#: includes/class-settings-page.php:58
+msgid "These products are not available for purchase in your country."
+msgstr ""
+
+#: includes/class-admin.php:23
+msgid "Restricted Product"
+msgstr ""
+
+#: includes/class-admin.php:24
+msgid "Check this box to mark this product as restricted for certain countries."
+msgstr ""
+
+#: includes/class-admin.php:36
+msgid "Insufficient permissions."
+msgstr ""
+
+#: includes/class-frontend.php:59
+msgid "Invalid product IDs."
+msgstr ""
+
+#: includes/class-frontend.php:75
+msgid "Removed restricted items: %s"
+msgstr ""
+
+#: includes/class-activator.php:12
+msgid "This plugin requires WordPress 5.0 or higher."
+msgstr ""
+
+#: includes/class-activator.php:13
+msgid "Plugin Activation Error"
+msgstr ""
+
+#: includes/class-activator.php:21
+msgid "This plugin requires WooCommerce to be installed and active."
+msgstr ""
+
+#: includes/class-activator.php:22
+msgid "Plugin Activation Error"
+msgstr ""
+
+#: includes/class-frontend.php:321
+msgid "Purchase Restriction Notice"
+msgstr ""
+
+#: includes/class-frontend.php:322
+msgid "This product may not be available for purchase in certain countries. Please check restrictions on the checkout page."
+msgstr ""
+
+#: includes/class-frontend.php:323
+msgid "Restricted in:"
+msgstr ""
