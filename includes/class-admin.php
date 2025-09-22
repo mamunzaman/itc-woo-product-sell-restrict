@@ -8,6 +8,7 @@ class Ict_Mcp_Admin {
     
     public function __construct() {
         add_action('admin_init', [$this, 'init']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
         add_action('wp_ajax_ict_mcp_search_products', [$this, 'ajax_search_products']);
     }
     
@@ -15,6 +16,28 @@ class Ict_Mcp_Admin {
         // Add custom fields to product edit page
         add_action('woocommerce_product_options_general_product_data', [$this, 'add_product_restriction_field']);
         add_action('woocommerce_process_product_meta', [$this, 'save_product_restriction_field']);
+    }
+    
+    public function enqueue_admin_scripts(): void {
+        // Only load on WooCommerce settings pages
+        if (isset($_GET['page']) && $_GET['page'] === 'wc-settings' && 
+            isset($_GET['tab']) && $_GET['tab'] === 'ict_mcp_restricted_purchase') {
+            
+            wp_enqueue_style(
+                'ict-mcp-admin',
+                ICT_MCP_PLUGIN_URL . 'assets/css/ict-mcp-admin.css',
+                [],
+                ICT_MCP_VERSION
+            );
+            
+            wp_enqueue_script(
+                'ict-mcp-admin',
+                ICT_MCP_PLUGIN_URL . 'assets/js/ict-mcp-admin.js',
+                ['jquery'],
+                ICT_MCP_VERSION,
+                true
+            );
+        }
     }
     
     public function add_product_restriction_field(): void {

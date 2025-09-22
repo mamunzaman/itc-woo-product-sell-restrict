@@ -39,7 +39,7 @@ class Ict_Mcp_Settings {
         }
         
         if (isset($input['restriction_message'])) {
-            $sanitized['restriction_message'] = sanitize_textarea_field($input['restriction_message']);
+            $sanitized['restriction_message'] = wp_kses_post($input['restriction_message']);
         }
         
         return $sanitized;

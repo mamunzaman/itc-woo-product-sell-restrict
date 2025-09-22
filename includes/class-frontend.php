@@ -6,7 +6,10 @@ declare(strict_types=1);
  */
 class Ict_Mcp_Frontend {
     
+    private static $restriction_notice_added = false;
+    
     public function __construct() {
+        add_action('wp_loaded', [$this, 'reset_notice_flag']);
         add_action('wp_loaded', [$this, 'check_cart_restrictions']);
         add_action('woocommerce_checkout_process', [$this, 'validate_checkout']);
         add_action('woocommerce_checkout_order_processed', [$this, 'validate_order_processed']);
@@ -16,8 +19,12 @@ class Ict_Mcp_Frontend {
         add_action('woocommerce_cart_updated', [$this, 'on_cart_updated']);
         add_action('woocommerce_checkout_update_order_review', [$this, 'validate_order_review']);
         add_filter('woocommerce_checkout_process', [$this, 'prevent_checkout_if_restricted'], 10, 0);
-        // add_action('woocommerce_before_single_product', [$this, 'add_product_restriction_notice'], 5);
+        add_action('woocommerce_before_single_product', [$this, 'add_product_restriction_notice'], 5);
         add_action('wp_head', [$this, 'add_conditional_css']);
+    }
+    
+    public function reset_notice_flag(): void {
+        self::$restriction_notice_added = false;
     }
     
     public function check_cart_restrictions(): void {
@@ -56,6 +63,11 @@ class Ict_Mcp_Frontend {
             return;
         }
         
+        // Prevent duplicate notices
+        if (self::$restriction_notice_added) {
+            return;
+        }
+        
         $message = Ict_Mcp_Settings::get_restriction_message();
         $customer_country = $this->get_customer_country();
         
@@ -63,38 +75,38 @@ class Ict_Mcp_Frontend {
         error_log('ICT MCP Validation - Customer Country: ' . $customer_country);
         error_log('ICT MCP Validation - Restricted Items: ' . print_r($restricted_items, true));
         
-        foreach ($restricted_items as $item) {
-            wc_add_notice(
-                sprintf(
-                    esc_html__('%s: %s', 'itc-woo-product-sell-restrict'),
-                    $item['product_name'],
-                    $message
-                ),
-                'error'
-            );
-        }
+        // Create a single notice with all restricted products
+        $product_names = wp_list_pluck($restricted_items, 'product_name');
+        $products_list = '<ul><li>' . implode('</li><li>', array_map('esc_html', $product_names)) . '</li></ul>';
+        
+        // Add single consolidated notice with proper HTML preservation
+        $notice_html = sprintf(
+            '<div class="ict-mcp-checkout-restriction-notice">
+                <p><strong>%s</strong></p>
+                <div class="ict-mcp-restriction-message">%s</div>
+                <div class="ict-mcp-restricted-products-list">%s</div>
+            </div>',
+            esc_html__('Purchase Restriction Notice', 'itc-woo-product-sell-restrict'),
+            wp_kses_post($message),
+            $products_list
+        );
+        
+        // Add notice using WooCommerce's notice system but preserve HTML
+        wc_add_notice($notice_html, 'error');
         
         // Prevent checkout by adding a critical error
         wc_add_notice(
             esc_html__('Checkout cannot be completed due to restricted products in your cart.', 'itc-woo-product-sell-restrict'),
             'error'
         );
+        
+        // Mark notice as added to prevent duplicates
+        self::$restriction_notice_added = true;
     }
     
     public function prevent_checkout_if_restricted(): void {
         $restricted_items = $this->get_restricted_items_in_cart();
         if (!empty($restricted_items)) {
-            // Add error to prevent checkout
-            foreach ($restricted_items as $item) {
-                wc_add_notice(
-                    sprintf(
-                        esc_html__('Product "%s" cannot be purchased in your country. Please remove it from your cart to continue.', 'itc-woo-product-sell-restrict'),
-                        $item['product_name']
-                    ),
-                    'error'
-                );
-            }
-            
             // Throw an exception to stop checkout process
             throw new Exception(esc_html__('Checkout cannot be completed due to restricted products.', 'itc-woo-product-sell-restrict'));
         }
@@ -245,18 +257,26 @@ class Ict_Mcp_Frontend {
         
         $notice = sprintf(
             '<div class="ict-mcp-restriction-notice" data-restricted-products="%s">
+                <div class="ict-mcp-notice-header">
+                    <div class="ict-mcp-notice-icon">⚠️</div>
+                    <h4 class="ict-mcp-notice-title">%s</h4>
+                </div>
                 <div class="ict-mcp-notice-content">
-                    <strong>%s</strong>
-                    <p>The following products cannot be purchased in your country:</p>
-                    <ul>%s</ul>
+                    <div class="ict-mcp-notice-message">%s</div>
+                    <div class="ict-mcp-restricted-products">
+                        <span class="ict-mcp-products-label">%s</span>
+                        <ul class="ict-mcp-products-list">%s</ul>
+                    </div>
                 </div>
             </div>',
             esc_attr(wp_json_encode(wp_list_pluck($restricted_items, 'product_id'))),
-            esc_html($message),
+            esc_html__('Purchase Restriction Notice', 'itc-woo-product-sell-restrict'),
+            wp_kses_post($message),
+            esc_html__('Restricted Products:', 'itc-woo-product-sell-restrict'),
             '<li>' . implode('</li><li>', array_map('esc_html', $product_names)) . '</li>'
         );
         
-        // Add custom notice to cart page
+        // Add custom notice to cart page with HTML preservation
         if (is_cart()) {
             wc_add_notice($notice, 'notice');
         }
@@ -309,6 +329,7 @@ class Ict_Mcp_Frontend {
         
         // Only show notice if there are restricted countries and this product is restricted
         if ($is_restricted && !empty($restricted_countries)) {
+            $message = Ict_Mcp_Settings::get_restriction_message();
             $countries_list = implode(', ', array_map(function($country_code) {
                 $countries = WC()->countries->get_countries();
                 return $countries[$country_code] ?? $country_code;
@@ -321,7 +342,7 @@ class Ict_Mcp_Frontend {
                         <h4 class="ict-mcp-notice-title">%s</h4>
                     </div>
                     <div class="ict-mcp-notice-content">
-                        <p class="ict-mcp-notice-message">%s</p>
+                        <div class="ict-mcp-notice-message">%s</div>
                         <div class="ict-mcp-notice-countries">
                             <span class="ict-mcp-countries-label">%s</span>
                             <span class="ict-mcp-countries-list">%s</span>
@@ -329,7 +350,7 @@ class Ict_Mcp_Frontend {
                     </div>
                 </div>',
                 esc_html__('Purchase Restriction Notice', 'itc-woo-product-sell-restrict'),
-                esc_html__('This product may not be available for purchase in certain countries. Please check restrictions on the checkout page.', 'itc-woo-product-sell-restrict'),
+                wp_kses_post($message),
                 esc_html__('Restricted in:', 'itc-woo-product-sell-restrict'),
                 esc_html($countries_list)
             );
@@ -396,10 +417,6 @@ class Ict_Mcp_Frontend {
                     animation: ict-mcp-slideInUp 0.4s ease-out;
                     overflow: hidden;
                     z-index: 10;
-                    text-align: center;
-                    border: 1px solid red;
-                    border-radius: 8px;
-                    margin-bottom: 20px;
                 }
                 
                 .ict-mcp-product-restriction-notice .ict-mcp-notice-header {
